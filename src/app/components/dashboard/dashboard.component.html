@@ -1,3 +1,31 @@
-<div class="container-fluid text-left">
+
+<div class="dashboard">
+
+<div class="container-fluid  text-left">
     <h1>{{title}}</h1>
-  </div>
+</div>
+
+<div class="container-fluid  grid-container">
+    <div *ngFor="let user of users" class="grid-element">
+        <div class="card shadow p-1">
+            <div class="card-body">
+                <div class="grid-innner-element">
+                    <div class="image-wrapper">
+                        <img class="grid-image" src="https://image.tmdb.org/t/p/w500{{user.poster_path}}" alt="">
+                    </div>
+                    <div class="grid-product-details">
+                        <p class="product-grid-heading">
+                            {{user.title}}
+                        </p>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
