@@ -4,17 +4,37 @@
         <h1>{{title}}</h1>
     </div>
 
+    <div class="search-hero container-fluid">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="Search Movies">
+        <!-- <span><fa-icon [icon]="filmIcon"></fa-icon></span> -->
+        <!-- <span><i class="fa-solid fa-magnifying-glass"></i></span> -->
+        <!-- <button type="submit"><i class="fa fa-search"></i></button> -->
+        <button type="submit" (click)="search(searchText)">
+            🔍
+        </button>
+    </div>
+
     <div class="container-fluid  grid-container">
-        <div *ngFor="let user of users  | paginate : {itemsPerPage:20, currentPage : page, totalItems:totalLength} " class="grid-element">
+        <div *ngFor="let user of users  | paginate : {itemsPerPage:20, currentPage : page, totalItems:totalLength} | filter:searchText"
+            class="grid-element">
             <div class="card shadow p-1">
                 <div class="card-body">
                     <div class="grid-innner-element">
                         <div class="image-wrapper">
-                            <img class="grid-image" src="https://image.tmdb.org/t/p/w500{{user.poster_path}}" alt="">
+                            <img routerLink="/movie/{{user.title}}" (click)="setdata(user.id)" class="grid-image"
+                                src="https://image.tmdb.org/t/p/w500{{user.poster_path}}" alt="">
                         </div>
-                        <div class="grid-product-details">
-                            <p class="product-grid-heading">
+                        <div routerLink="/movie/{{user.title}}" (click)="setdata(user.id)" class="grid-product-details">
+                            <p routerLink="/movie/{{user.title}}" (click)="setdata(user.id)"class="product-grid-heading">
                                 {{user.title}}
+                            </p>
+                            <p style="height: 22px;
+                            width: 52px;
+                            left: 19px;
+                            top: 25px;
+                            ">
+                                ⭐ {{user.vote_average}}/10
                             </p>
 
 
@@ -27,6 +47,7 @@
         </div>
     </div>
     <div class="pagination justify-content-center">
-        <pagination-controls class="text-center my-pagination"  (pageChange)="callpage(page = $event)"></pagination-controls>
+        <pagination-controls class="text-center my-pagination" directionLinks="true" previousLabel="&lsaquo;"
+            nextLabel="&rsaquo;" (pageChange)="callpage(page = $event)"></pagination-controls>
     </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from 'src/app/services/api-service.service';
-import { callbackify } from 'util';
+import { StorageServiceService } from 'src/app/services/storage-service.service';
+// import { faFilm } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +10,11 @@ import { callbackify } from 'util';
 })
 export class DashboardComponent implements OnInit {
 title = "Trending";
+searchText:any;
 page=1;
 totalLength:any;
-  constructor(private apiservice: ApiServiceService,) { }
+// filmIcon = faFilm;
+  constructor(private apiservice: ApiServiceService,private storage: StorageServiceService) { }
   users = [];
   ngOnInit(): void {
     this.apiservice.getUsers(1).subscribe(response => {
@@ -32,6 +35,14 @@ totalLength:any;
       this.users = response.results;
     })    
   }
+  search(searchText){
+   this.apiservice.searchmovies(searchText).subscribe(response =>{
+    this.users = response.results;
+   })
+  }
+ setdata(p:number){
+  this.storage.putDataInStorage("id",JSON.stringify({p}));
+ }
 }
 
 

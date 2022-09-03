@@ -9,6 +9,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
 
 @NgModule({
   declarations: [
@@ -22,8 +27,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    NgxPaginationModule
-  ],
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
+    FormsModule,
+    // FontAwesomeModule
+  ],  
   providers: [],
   bootstrap: [AppComponent]
 })

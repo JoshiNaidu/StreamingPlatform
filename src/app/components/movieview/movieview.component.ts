@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from 'src/app/services/api-service.service';
+import { StorageServiceService } from 'src/app/services/storage-service.service';
 
 @Component({
   selector: 'app-movieview',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieviewComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private apiservice:ApiServiceService,private storage:StorageServiceService) { }
+  moviedata: any = [];
   ngOnInit(): void {
+    let id = JSON.parse(this.storage.getDataFromStorage('id'));
+    this.apiservice.movieonid(id.p).subscribe(response =>{
+      this.moviedata = response;
+
+      console.log(this.moviedata,'data')
+    })
   }
 
 }
